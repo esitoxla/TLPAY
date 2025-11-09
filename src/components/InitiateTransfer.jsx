@@ -1,7 +1,14 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { initiateTransfer, resetTransferState } from "../store/features/transferSlice";
 
 export default function InitiateTransfer() {
+
+    const dispatch = useDispatch();
+    const { loading, data, error, success } = useSelector(
+      (state) => state.transfer
+    );
   const [formData, setFormData] = useState({
     type: 1,
     channel: "",
@@ -14,18 +21,40 @@ export default function InitiateTransfer() {
     accountnumber: "",
   });
 
-  const [loading, setLoading] = useState(false);
-  const [result, setResult] = useState(null);
+ 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    dispatch(resetTransferState());
+    dispatch(initiateTransfer(formData));
+  };
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
+  
+  useEffect(() => {
+    if (success) {
+      setFormData({
+        type: 1,
+        channel: "",
+        currency: "GHS",
+        receiver: "",
+        sublistid: "",
+        amount: "",
+        externalref: "",
+        reference: "",
+        accountnumber: "",
+      });
+    }
+  }, [success]);
+
+
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
+    <div className="flex items-center justify-center m-2 md:m-0">
       <form
-        
-        className="bg-white/90 backdrop-blur-sm p-8 rounded-2xl shadow-2xl w-full max-w-2xl border border-gray-100 transition-transform hover:scale-[1.01]"
+        onSubmit={handleSubmit}
+        className="bg-white/90 backdrop-blur-sm px-8 py-4 rounded-2xl shadow-2xl w-full max-w-2xl border border-gray-100 transition-transform hover:scale-[1.01]"
       >
         <h2 className="text-[#0a192f] text-3xl font-bold mb-6 text-center tracking-wide">
           Initiate <span className="text-yellow-500">Transfer</span>
@@ -180,9 +209,18 @@ export default function InitiateTransfer() {
         </button>
 
         {/* Result */}
-        {result && (
-          <div className="mt-6 p-4 bg-gray-50 rounded-lg border border-gray-200 text-sm text-gray-800">
-            <pre>{JSON.stringify(result, null, 2)}</pre>
+        {success && data && (
+          <div className="bg-blue-100 text-blue-800 p-4 rounded border border-blue-300 mt-4">
+            <p>Transfer initiated successfully!</p>
+            <p>
+              <strong>Message:</strong> {data.message}
+            </p>
+          </div>
+        )}
+
+        {error && (
+          <div className="bg-red-100 text-red-700 p-4 rounded border border-red-300 mt-4">
+            <strong>Error:</strong> {error}
           </div>
         )}
       </form>

@@ -1,7 +1,14 @@
 import React from 'react'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux';
+import { checkTransferStatus } from '../store/features/transferSlice';
 
 export default function TransferStatus() {
+
+    const dispatch = useDispatch();
+    const { loading, data, error, success } = useSelector(
+      (state) => state.transfer
+    );
 
      const [formData, setFormData] = useState({
        type: 1,
@@ -14,10 +21,28 @@ export default function TransferStatus() {
        setFormData({ ...formData, [e.target.name]: e.target.value });
      };
 
+     const handleSubmit = (e) => {
+       e.preventDefault();
+       dispatch(checkTransferStatus(formData));
+     };
+
+     useEffect(() => {
+       if (success) {
+         setFormData({
+           type: 1,
+           idtype: "",
+           id: "",
+           accountnumber: "",
+         });
+       }
+     }, [success]);
+
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
-      <form className="bg-white/90 backdrop-blur-sm p-8 rounded-2xl shadow-2xl w-full max-w-2xl border border-gray-100 transition-transform hover:scale-[1.01]">
-      
+    <div className="flex items-center justify-center m-2 md:m-0">
+      <form
+        onSubmit={handleSubmit}
+        className="bg-white/90 backdrop-blur-sm p-8 rounded-2xl shadow-2xl w-full max-w-2xl border border-gray-100 transition-transform hover:scale-[1.01]"
+      >
         <h2 className="text-[#0a192f] text-3xl font-bold mb-6 text-center tracking-wide">
           Check <span className="text-yellow-500">Transfer Status</span>
         </h2>
@@ -26,9 +51,9 @@ export default function TransferStatus() {
           Enter the details below to verify your transaction status.
         </p>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 w-full">
+        <div className="grid grid-cols-1 gap-6 w-full">
           {/* Type */}
-          <div>
+          {/* <div>
             <label className="block mb-2 text-sm font-medium text-gray-700">
               Type
             </label>
@@ -39,7 +64,7 @@ export default function TransferStatus() {
               readOnly
               className="w-full p-2.5 rounded-lg border border-gray-300 bg-gray-100 text-gray-700"
             />
-          </div>
+          </div> */}
 
           {/* ID Type */}
           <div>
@@ -94,11 +119,31 @@ export default function TransferStatus() {
 
         {/* Submit Button (no handler yet) */}
         <button
-          type="button"
-          className="w-full mt-8 py-2.5 bg-yellow-500 hover:bg-yellow-400 text-black font-semibold rounded-lg shadow-md transition-all duration-200"
+          type="submit"
+          disabled={loading}
+          className="w-full py-2 mt-6 bg-yellow-500 hover:bg-yellow-400 text-black font-semibold rounded transition duration-200"
         >
-          Check Status
+          {loading ? "Checking..." : "Check Status"}
         </button>
+
+        {/*  Success Message */}
+        {success && data && (
+          <div className="bg-blue-100 text-blue-800 p-4 rounded border border-blue-300 mt-4">
+            <p>
+              <strong>Status:</strong> {data.data?.txstatus || "Success"}
+            </p>
+            <p>
+              <strong>Message:</strong> {data.message}
+            </p>
+          </div>
+        )}
+
+        {/* Error Message */}
+        {error && (
+          <div className="bg-red-100 text-red-700 p-4 rounded border border-red-300 mt-4">
+            <strong>Error:</strong> {error}
+          </div>
+        )}
       </form>
     </div>
   );

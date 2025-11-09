@@ -1,7 +1,8 @@
 import React from 'react'
 import { NavLink } from 'react-router';
+import { MdClose } from "react-icons/md";
 
-export default function Sidebar() {
+export default function Sidebar({ toggleSidebar }) {
   return (
     <div
       className="
@@ -11,7 +12,15 @@ export default function Sidebar() {
           z-50 overflow-y-auto
       "
     >
-      <div className="text-2xl font-bold px-6 text-yellow-300 py-6">TLPay</div>
+      <div className="md:hidden flex justify-end">
+        <button onClick={toggleSidebar} className="text-2xl text-gray-500">
+          <MdClose />
+        </button>
+      </div>
+
+      <div className="text-2xl font-bold px-6 text-yellow-300 py-4">TLPay</div>
+
+      <div className="border-b border-gray-600 py-4"></div>
 
       <div className="flex flex-col cursor-pointer">
         <NavLink to="validate">
