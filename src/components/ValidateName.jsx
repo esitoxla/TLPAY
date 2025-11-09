@@ -2,6 +2,7 @@ import React from "react";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { validateName, resetTransferState } from "../store/features/transferSlice";
+import { safeDisplay } from "../utils/safeDisplay";
 
 export default function ValidateName() {
 
@@ -145,7 +146,7 @@ export default function ValidateName() {
           <div className="mt-6 p-3 bg-blue-100 border border-blue-400 rounded text-sm text-blue-800">
             <p className="font-semibold">Account validated successfully!</p>
             <p>
-              <strong>Name:</strong> {data.data}
+              <strong>Name:</strong> {safeDisplay(data.data)}
             </p>
           </div>
         )}
@@ -155,7 +156,7 @@ export default function ValidateName() {
         {data && data.status === 0 && (
           <div className="mt-6 p-3 bg-red-100 border border-red-400 rounded text-sm text-red-800">
             <p>
-              <strong>Error:</strong> {data.message}
+              <strong>Error:</strong> {safeDisplay(data.message)}
             </p>
           </div>
         )}
@@ -164,7 +165,7 @@ export default function ValidateName() {
         {error && !data && (
           <div className="mt-6 p-3 bg-red-100 border border-red-400 rounded text-sm text-red-800">
             <p>
-              <strong>Error:</strong> {error.message || "Something went wrong"}
+              <strong>Error:</strong> {safeDisplay(error.message || "Something went wrong")}
             </p>
           </div>
         )}

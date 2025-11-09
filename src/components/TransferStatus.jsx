@@ -2,6 +2,8 @@ import React from 'react'
 import { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { checkTransferStatus } from '../store/features/transferSlice';
+import { safeDisplay } from '../utils/safeDisplay';
+
 
 export default function TransferStatus() {
 
@@ -130,10 +132,10 @@ export default function TransferStatus() {
         {success && data && (
           <div className="bg-blue-100 text-blue-800 p-4 rounded border border-blue-300 mt-4">
             <p>
-              <strong>Status:</strong> {data.data?.txstatus || "Success"}
+              <strong>Status:</strong> {safeDisplay(data.data?.txstatus || "Success")}
             </p>
             <p>
-              <strong>Message:</strong> {data.message}
+              <strong>Message:</strong> {safeDisplay(data.message)}
             </p>
           </div>
         )}
@@ -141,7 +143,7 @@ export default function TransferStatus() {
         {/* Error Message */}
         {error && (
           <div className="bg-red-100 text-red-700 p-4 rounded border border-red-300 mt-4">
-            <strong>Error:</strong> {error}
+            <strong>Error:</strong> {safeDisplay(error)}
           </div>
         )}
       </form>

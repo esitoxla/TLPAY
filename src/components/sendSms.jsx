@@ -3,6 +3,7 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { sendSms, resetSmsState } from "../store/features/smsSlice";
 import { useEffect } from "react";
+import { safeDisplay } from "../utils/safeDisplay";
 
 export default function sendSmsMessage() {
   const dispatch = useDispatch();
@@ -133,7 +134,7 @@ export default function sendSmsMessage() {
           <div className="bg-blue-100 text-blue-800 p-3 rounded mt-4">
             <p>SMS sent successfully!</p>
             <p>
-              <strong>Message:</strong> {data.message}
+              <strong>Message:</strong> {safeDisplay(data.message)}
             </p>
           </div>
         )}
@@ -141,7 +142,7 @@ export default function sendSmsMessage() {
         {/* Error Message */}
         {error && (
           <div className="bg-red-100 text-red-700 p-3 rounded mt-4">
-            <strong>Error:</strong> {error}
+            <strong>Error:</strong> {safeDisplay(error)}
           </div>
         )}
       </form>

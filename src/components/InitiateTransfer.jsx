@@ -2,6 +2,7 @@ import React from "react";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { initiateTransfer, resetTransferState } from "../store/features/transferSlice";
+import { safeDisplay } from "../utils/safeDisplay";
 
 export default function InitiateTransfer() {
 
@@ -213,14 +214,14 @@ export default function InitiateTransfer() {
           <div className="bg-blue-100 text-blue-800 p-4 rounded border border-blue-300 mt-4">
             <p>Transfer initiated successfully!</p>
             <p>
-              <strong>Message:</strong> {data.message}
+              <strong>Message:</strong> {safeDisplay(data.message)}
             </p>
           </div>
         )}
 
         {error && (
           <div className="bg-red-100 text-red-700 p-4 rounded border border-red-300 mt-4">
-            <strong>Error:</strong> {error}
+            <strong>Error:</strong> {safeDisplay(error)}
           </div>
         )}
       </form>
