@@ -27,6 +27,7 @@ export default function ValidateName() {
     const handleSubmit = async (e) => {
       e.preventDefault();
       dispatch(resetTransferState());
+      
        dispatch(validateName(formData));
     };
 

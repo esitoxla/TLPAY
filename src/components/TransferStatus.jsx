@@ -1,7 +1,7 @@
 import React from 'react'
 import { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { checkTransferStatus } from '../store/features/transferSlice';
+import { checkTransferStatus, resetTransferState } from '../store/features/transferSlice';
 import { safeDisplay } from '../utils/safeDisplay';
 
 
@@ -25,6 +25,9 @@ export default function TransferStatus() {
 
      const handleSubmit = (e) => {
        e.preventDefault();
+
+       dispatch(resetTransferState());
+
        dispatch(checkTransferStatus(formData));
      };
 

@@ -25,7 +25,9 @@ export default function InitiateTransfer() {
  
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(resetTransferState());
+    
+    dispatch(resetTransferState()); 
+
     dispatch(initiateTransfer(formData));
   };
 
