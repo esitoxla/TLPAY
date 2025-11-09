@@ -15,7 +15,7 @@ function App() {
     Component: Dashboard,
     children: [
       {
-        path: "validate",
+        index: true,
         Component: ValidateName
       },
       {

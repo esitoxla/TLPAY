@@ -23,7 +23,7 @@ export default function Sidebar({ toggleSidebar }) {
       <div className="border-b border-gray-600 py-4"></div>
 
       <div className="flex flex-col cursor-pointer">
-        <NavLink to="validate">
+        <NavLink to="/" end>
           {({ isActive }) => (
             <div
               className={`flex gap-2 items-center px-4 py-2 ${
