@@ -41,14 +41,14 @@ export default function TransferStatus() {
     <div className="flex items-center justify-center m-2 md:m-0">
       <form
         onSubmit={handleSubmit}
-        className="bg-white/90 backdrop-blur-sm p-8 rounded-2xl shadow-2xl w-full max-w-2xl border border-gray-100 transition-transform hover:scale-[1.01]"
+        className="bg-white p-8 rounded-2xl shadow-lg w-full max-w-md"
       >
         <h2 className="text-[#0a192f] text-3xl font-bold mb-6 text-center tracking-wide">
           Check <span className="text-yellow-500">Transfer Status</span>
         </h2>
 
         <p className="text-center text-gray-500 mb-8 text-sm">
-          Enter the details below to verify your transaction status.
+          Enter the details to verify your transaction status.
         </p>
 
         <div className="grid grid-cols-1 gap-6 w-full">

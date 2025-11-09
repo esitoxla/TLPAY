@@ -17,11 +17,11 @@ export default function Dashboard() {
       )}
 
       <div className="flex flex-col w-full min-h-screen bg-gray-100">
-        <div onClick={setIsSidebarOpen} className="cursor-pointer p-6 ">
+        <div onClick={setIsSidebarOpen} className="md:hidden cursor-pointer p-6 ">
           <MdMenu className="text-2xl" />
         </div>
 
-        <div className="flex-1 overflow-y-auto bg-gray-100">
+        <div className="flex-1 overflow-y-auto p-4 bg-gray-100">
           <Outlet />
         </div>
       </div>
