@@ -1,7 +1,6 @@
 import {
   createAsyncThunk,
   createSlice,
-  isRejectedWithValue,
 } from "@reduxjs/toolkit";
 import { api } from "../../config/axios";
 
@@ -10,6 +9,7 @@ export const validateName = createAsyncThunk(
   "transfer/validateName",
   async (FormData, { rejectWithValue }) => {
     try {
+      //Destructures the Axios response to extract only the data field
       const { data } = await api.post("/transfer/validate-name", FormData);
       return data;
     } catch (error) {
@@ -54,7 +54,7 @@ const transferSlice = createSlice({
     success: false,
   },
 
-  //Resets the Redux state for your transfer slice back to its initial “clean” state. after performing an operation  Redux state might hold data or error messages. so this is called to clear everything.
+  //Resets the Redux state for the transfer slice back to its initial “clean” state. after performing an operation  Redux state might hold data or error messages. so this is called to clear everything.
   reducers: {
     resetTransferState: (state) => {
       state.loading = false;

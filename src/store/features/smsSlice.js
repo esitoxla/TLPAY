@@ -54,5 +54,6 @@ const smsSlice = createSlice({
   },
 });
 
+//this destructures the resetSmsState action creator from the smsSlice.actions object.
 export const { resetSmsState } = smsSlice.actions;
 export default smsSlice.reducer;

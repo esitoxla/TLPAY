@@ -12,7 +12,7 @@ export default function ValidateName() {
       channel: "",
       sublistid: "",
       currency: "GHS",
-      accountnumber: "",
+      accountnumber: "10745106058181",
     });
 
     const dispatch = useDispatch();
@@ -39,13 +39,13 @@ export default function ValidateName() {
             channel: "",
             sublistid: "",
             currency: "GHS",
-            accountnumber: "",
+            accountnumber: "10745106058181",
           });
         }
       }, [success]);
 
   return (
-    <div className="flex items-center justify-center m-2 md:m-0">
+    <div className="flex items-center justify-center m-2 md:my-20">
       <form
         onSubmit={handleSubmit}
         className="bg-white p-8 rounded-2xl shadow-lg w-full max-w-md"
@@ -104,7 +104,7 @@ export default function ValidateName() {
           </div>
         )}
         {/* Currency */}
-        <div className="mb-4">
+        {/* <div className="mb-4">
           <label className="block mb-2 text-sm font-medium text-gray-700">
             Currency
           </label>
@@ -117,9 +117,9 @@ export default function ValidateName() {
             <option value="GHS">GHS - Ghana Cedis</option>
             <option value="NGN">NGN - Nigerian Naira</option>
           </select>
-        </div>
+        </div> */}
         {/* Account Number */}
-        <div className="mb-6">
+        {/* <div className="mb-6">
           <label className="block mb-2 text-sm font-medium text-gray-700">
             Your Account Number
           </label>
@@ -132,7 +132,8 @@ export default function ValidateName() {
             placeholder="Your Moolre Account Number"
             className="w-full p-2 rounded border border-gray-300 "
           />
-        </div>
+        </div> */}
+
         {/* Submit Button */}
         <button
           type="submit"
